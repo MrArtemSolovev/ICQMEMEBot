@@ -5,7 +5,7 @@ import article_id_sql
 import sql_handlers
 
 
-TOKEN = "001.1863506468.3144434951:752081935"
+TOKEN = "..."
 
 
 bot = Bot(token=TOKEN)
