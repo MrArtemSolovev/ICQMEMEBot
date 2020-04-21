@@ -5,7 +5,7 @@ import article_id_sql
 import sql_handlers
 
 
-TOKEN = "..."
+TOKEN = "001.1863506468.3144434951:752081935"
 
 
 bot = Bot(token=TOKEN)
@@ -41,10 +41,13 @@ def meme_sender(bot, event):
         article_id_sql.article_id_insert(post_raw)
         bot.send_text(chat_id=event.from_chat , text=post_raw[1] +'\n\n'+ post_raw[2]+'\n\n'+'Источник: '+post_raw[3])
 
+def main():
+    bot.dispatcher.add_handler(UnknownCommandHandler(callback=unknown_command_cb))
+    bot.dispatcher.add_handler(StartCommandHandler(callback=start_command))
+    bot.dispatcher.add_handler(HelpCommandHandler(callback=help_command))
+    bot.dispatcher.add_handler(CommandHandler(command="meme", callback=meme_sender))
+    bot.start_polling()
+    bot.idle()
 
-bot.dispatcher.add_handler(UnknownCommandHandler(callback=unknown_command_cb))
-bot.dispatcher.add_handler(StartCommandHandler(callback=start_command))
-bot.dispatcher.add_handler(HelpCommandHandler(callback=help_command))
-bot.dispatcher.add_handler(CommandHandler(command="meme", callback=meme_sender))
-bot.start_polling()
-bot.idle()
+if __name__ == "__main__":
+    main()
